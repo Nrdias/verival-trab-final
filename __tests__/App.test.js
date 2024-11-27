@@ -100,8 +100,9 @@ describe('Register New Establishment Integration Flow', () => {
       return Promise.reject(new Error('Not found'));
     });
   });
-  it('should allow user to navigate to register new establishment screen', async () => {
+  it('should allow user to navigate to register new establishment screen, fill all fields correctly and submit, and then call the api successfully', async () => {
     await waitFor(() => render(<TestNavigator />) );
+
     await waitFor(() => {
       expect(screen.getByText('Cadastrar um local')).toBeDefined();
     });
@@ -182,5 +183,26 @@ describe('Register New Establishment Integration Flow', () => {
         transformRequest: expect.any(Function)
       }
     );
+  });
+
+  test('should allow user to navigate to register new establishment screen, and when let fields empty, show error messages', async () => {
+    await waitFor(() => render(<TestNavigator />) );
+
+    const registerEstablishmentButton = await screen.findByText('Cadastrar um local');
+    fireEvent.press(registerEstablishmentButton);
+
+    const checkbox = await screen.findByText('Li e aceito os Termos de Uso');
+    fireEvent.press(checkbox);
+
+    const nextAddresScreenButton = await screen.findByText('Próximo');
+    fireEvent.press(nextAddresScreenButton);
+
+    const nameErrorMessage = await screen.findByText('Por favor, insira o nome');
+    const typeErrorMessage = await screen.findByText('Por favor, insira o tipo');
+    const phoneErrorMessage = await screen.findByText('Por favor, insira o telefone');
+
+    expect(nameErrorMessage).toBeDefined();
+    expect(typeErrorMessage).toBeDefined();
+    expect(phoneErrorMessage).toBeDefined();
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react-native';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 import ProfileScreen from '../src/screens/ProfileScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -82,10 +82,6 @@ describe('ProfileScreen', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-  });
-
-  test('renders correctly', async () => {
-    // Mock AsyncStorage
     jest.spyOn(AsyncStorage, 'getItem')
       .mockImplementation((key) => {
         switch(key) {
@@ -95,7 +91,9 @@ describe('ProfileScreen', () => {
           default: return Promise.resolve(null);
         }
       });
+  });
 
+  test('renders correctly', async () => {
     const { getByText } = render(<ProfileScreen navigation={mockNavigation} />);
 
     await waitFor(() => {
@@ -104,5 +102,30 @@ describe('ProfileScreen', () => {
       expect(getByText('Developer')).toBeVisible();
       expect(getByText('test@example.com')).toBeVisible();
     });
+  });
+
+  test('should allow user to navigate to edit profile screen', async () => {
+    await waitFor(() => render(<ProfileScreen navigation={mockNavigation} />));
+
+    const editProfileButton = await screen.findByText('Editar perfil');
+    fireEvent.press(editProfileButton);
+
+    expect(mockNavigation.navigate).toBeCalled();
+  });
+
+  test('should allow user to navigate to establishments user screen', async () => {
+    await waitFor(() => render(<ProfileScreen navigation={mockNavigation} />));
+
+    const establishmentsUserButton = await screen.findByText('Locais cadastrados');
+    fireEvent.press(establishmentsUserButton);
+
+    expect(mockNavigation.navigate).toBeCalled();
+  });
+
+  test('should allow user to deactivate account', async () => {
+    await waitFor(() => render(<ProfileScreen navigation={mockNavigation} />));
+
+    const deactivateAccountButton = await screen.findByText('Desativar');
+    fireEvent.press(deactivateAccountButton);
   });
 });
