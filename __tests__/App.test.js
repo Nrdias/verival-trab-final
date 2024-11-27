@@ -101,94 +101,86 @@ describe('Register New Establishment Integration Flow', () => {
     });
   });
   it('should allow user to navigate to register new establishment screen', async () => {
-    render(<TestNavigator />);
-    // const registerEstablishmentButton = await screen.findByText('Cadastrar um local');
-    // expect(registerEstablishmentButton).toBeDefined();
-    // await fireEvent.press(registerEstablishmentButton);
+    await waitFor(() => render(<TestNavigator />) );
+    await waitFor(() => {
+      expect(screen.getByText('Cadastrar um local')).toBeDefined();
+    });
 
-    // await waitFor(() => {
-    //   expect(screen.getByText('Cadastre um local')).toBeTruthy();
-    // });
-    // const registerEstablishmentButton = await screen.findByText('Cadastrar um local');
-    // expect(registerEstablishmentButton).toBeDefined();
-    // await fireEvent.press(registerEstablishmentButton);
+    const registerEstablishmentButton = await screen.findByText('Cadastrar um local');
+    fireEvent.press(registerEstablishmentButton);
 
-    // await waitFor(() => {
-    //   expect(mockNavigation.navigate).toHaveBeenCalledWith('EstablishmentRegistrationScreen');
-    // });
-    
-    // const establishmentNameInput = await screen.findByText('Nome do Estabelecimento');
-    // const establishmentCnpjInput = await screen.findByText('CNPJ');
-    // const establishmentTypeInput = await screen.findByText('Tipo de estabelecimento');
-    // const establishmentPhoneInput = await screen.findByText('Telefone');
-    // const establishmentSiteInput = await screen.findByText('Site');
-    // const checkbox = await screen.findByText('Li e aceito os Termos de Uso');
+    const establishmentNameInput = await screen.findByText('Nome do Estabelecimento');
+    const establishmentCnpjInput = await screen.findByText('CNPJ');
+    const establishmentTypeInput = await screen.findByText('Tipo de estabelecimento');
+    const establishmentPhoneInput = await screen.findByText('Telefone');
+    const establishmentSiteInput = await screen.findByText('Site');
+    const checkbox = await screen.findByText('Li e aceito os Termos de Uso');
 
-    // expect(establishmentNameInput).toBeDefined();
-    // expect(establishmentCnpjInput).toBeDefined();
-    // expect(establishmentTypeInput).toBeDefined();
-    // expect(establishmentPhoneInput).toBeDefined();
-    // expect(establishmentSiteInput).toBeDefined();
-    // expect(checkbox).toBeDefined();
+    expect(establishmentNameInput).toBeDefined();
+    expect(establishmentCnpjInput).toBeDefined();
+    expect(establishmentTypeInput).toBeDefined();
+    expect(establishmentPhoneInput).toBeDefined();
+    expect(establishmentSiteInput).toBeDefined();
+    expect(checkbox).toBeDefined();
 
-    // fireEvent.changeText(establishmentNameInput, fakeEstablishment.name);
-    // fireEvent.changeText(establishmentCnpjInput, fakeEstablishment.cnpj);
-    // fireEvent.changeText(establishmentPhoneInput, fakeEstablishment.phone);
-    // fireEvent.changeText(establishmentSiteInput, fakeEstablishment.site);
-    // fireEvent.press(checkbox);
+    fireEvent.changeText(establishmentNameInput, fakeEstablishment.name);
+    fireEvent.changeText(establishmentCnpjInput, fakeEstablishment.cnpj);
+    fireEvent.changeText(establishmentPhoneInput, fakeEstablishment.phone);
+    fireEvent.changeText(establishmentSiteInput, fakeEstablishment.site);
+    fireEvent.press(checkbox);
 
-    // const nextAddresScreenButton = await screen.findByText('Próximo');
-    // expect(nextAddresScreenButton).toBeDefined();
-    // fireEvent.press(nextAddresScreenButton);
+    const nextAddresScreenButton = await screen.findByText('Próximo');
+    expect(nextAddresScreenButton).toBeDefined();
+    fireEvent.press(nextAddresScreenButton);
 
-    // const establishmentAddressScreen = await screen.findByText('Cadastre um local');
-    // expect(establishmentAddressScreen).toBeDefined();
+    const establishmentAddressScreen = await screen.findByText('Cadastre um local');
+    expect(establishmentAddressScreen).toBeDefined();
 
-    // const streetInput = await screen.findByPlaceholderText('Rua');
-    // const neighborhoodInput = await screen.findByPlaceholderText('Bairro');
-    // const stateInput = await screen.findByPlaceholderText('Estado');
-    // const cityInput = await screen.findByPlaceholderText('Cidade');
-    // const numberInput = await screen.findByPlaceholderText('Número');
-    // const cepInput = await screen.findByPlaceholderText('CEP');
-    // const complementInput = await screen.findByPlaceholderText('Complemento');
+    const streetInput = await screen.findByPlaceholderText('Rua');
+    const neighborhoodInput = await screen.findByPlaceholderText('Bairro');
+    const stateInput = await screen.findByPlaceholderText('Estado');
+    const cityInput = await screen.findByPlaceholderText('Cidade');
+    const numberInput = await screen.findByPlaceholderText('Número');
+    const cepInput = await screen.findByPlaceholderText('CEP');
+    const complementInput = await screen.findByPlaceholderText('Complemento');
 
-    // fireEvent.changeText(streetInput, fakeEstablishment.address.street);
-    // fireEvent.changeText(neighborhoodInput, fakeEstablishment.address.neighborhood);
-    // fireEvent.changeText(stateInput, fakeEstablishment.address.state);
-    // fireEvent.changeText(cityInput, fakeEstablishment.address.city);
-    // fireEvent.changeText(numberInput, fakeEstablishment.address.number);
-    // fireEvent.changeText(cepInput, fakeEstablishment.address.zipCode);
-    // fireEvent.changeText(complementInput, fakeEstablishment.address.additionalDetails);
+    fireEvent.changeText(streetInput, fakeEstablishment.address.street);
+    fireEvent.changeText(neighborhoodInput, fakeEstablishment.address.neighborhood);
+    fireEvent.changeText(stateInput, fakeEstablishment.address.state);
+    fireEvent.changeText(cityInput, fakeEstablishment.address.city);
+    fireEvent.changeText(numberInput, fakeEstablishment.address.number);
+    fireEvent.changeText(cepInput, fakeEstablishment.address.zipCode);
+    fireEvent.changeText(complementInput, fakeEstablishment.address.additionalDetails);
 
-    // const nextTagsScreenButton = await screen.findByText('Próximo');
-    // expect(nextTagsScreenButton).toBeDefined();
-    // fireEvent.press(nextTagsScreenButton);
+    const nextTagsScreenButton = await screen.findByText('Próximo');
+    expect(nextTagsScreenButton).toBeDefined();
+    fireEvent.press(nextTagsScreenButton);
 
-    // const establishmentTagsScreen = await screen.findByText('Adicione tags');
-    // const firstTag = await screen.findByText('Rampas de acesso"');
-    // fireEvent.press(firstTag);
+    const establishmentTagsScreen = await screen.findByText('Adicione tags');
+    const firstTag = await screen.findByText('Rampas de acesso"');
+    fireEvent.press(firstTag);
 
-    // const nextImagesScreenButton = await screen.findByText('Próximo');
-    // expect(nextImagesScreenButton).toBeDefined();
-    // fireEvent.press(nextImagesScreenButton);
+    const nextImagesScreenButton = await screen.findByText('Próximo');
+    expect(nextImagesScreenButton).toBeDefined();
+    fireEvent.press(nextImagesScreenButton);
 
-    // const establishmentImagesScreen = await screen.findByText('Adicione imagens');
-    // expect(establishmentImagesScreen).toBeDefined();
+    const establishmentImagesScreen = await screen.findByText('Adicione imagens');
+    expect(establishmentImagesScreen).toBeDefined();
 
-    // const finishButton = await screen.findByText('Concluir');
-    // expect(finishButton).toBeDefined();
-    // fireEvent.press(finishButton);
+    const finishButton = await screen.findByText('Concluir');
+    expect(finishButton).toBeDefined();
+    fireEvent.press(finishButton);
 
-    // expect(api.post).toHaveBeenCalledWith(
-    //   'v1/establishments',
-    //   expect.any(FormData),
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer fake-token`,
-    //       'Content-Type': 'multipart/form-data',
-    //     },
-    //     transformRequest: expect.any(Function)
-    //   }
-    // );
+    expect(api.post).toHaveBeenCalledWith(
+      'v1/establishments',
+      expect.any(FormData),
+      {
+        headers: {
+          Authorization: `Bearer fake-token`,
+          'Content-Type': 'multipart/form-data',
+        },
+        transformRequest: expect.any(Function)
+      }
+    );
   });
 });
